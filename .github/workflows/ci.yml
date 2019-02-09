@@ -1,0 +1,50 @@
+name: ci
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: [12]
+        os: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Set Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Install
+        run: |
+          npm ci
+      - name: Lint
+        run: |
+          npm run lint
+      - name: Build
+        run: |
+          npm run build
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: [12]
+        os: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Set Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Install
+        run: |
+          npm ci
+      - name: tests
+        run: |
+          npm run test:ci
