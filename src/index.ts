@@ -1,6 +1,6 @@
-import { MyRx } from './MyRx';
+import { Counter } from './Counter';
 
 (() => {
-  const myRx = new MyRx(1000);
-  myRx.count();
+  const counter = new Counter(1000);
+  counter.count();
 })();
