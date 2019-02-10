@@ -1,7 +1,7 @@
 import { interval, Observable } from 'rxjs';
 
 export class Counter {
-  private source: Observable<number>;
+  public source: Observable<number>;
 
   constructor(intervalValue: number) {
     // create an Observable from interval
