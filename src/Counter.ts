@@ -1,14 +1,14 @@
-import { Observable, interval } from 'rxjs';
+import { interval, Observable } from 'rxjs';
 
 export class Counter {
-  source: Observable<number>;
+  private source: Observable<number>;
 
   constructor(intervalValue: number) {
     // create an Observable from interval
     this.source = interval(intervalValue);
   }
 
-  count() {
+  public count() {
     // store the subscription
     const subscription = this.source.subscribe(val => console.log(val));
 

@@ -1,25 +1,31 @@
 {
-  "name": "rxjs-example",
-  "version": "0.0.1",
-  "description": "Example project to illustrate RxJS features.",
-  "scripts": {
-    "start": "tsc && node dist/index.js",
-	"test": "mocha -r ts-node/register src/**/*.spec.ts"
-  },
-  "keywords": [
-    "rxjs"
-  ],
-  "author": "Rober Rahn & Ammar Najjar",
-  "license": "MIT",
-  "dependencies": {
-    "rxjs": "^6.3.3",
-    "typescript": "^3.2.2"
-  },
-  "devDependencies": {
-    "@types/chai": "^4.1.7",
-    "@types/mocha": "^5.2.5",
-    "chai": "^4.2.0",
-    "mocha": "^5.2.0",
-    "ts-node": "^8.0.2"
-  }
+	"name": "rxjs-example",
+	"version": "0.0.1",
+	"description": "Example project to illustrate RxJS features.",
+	"scripts": {
+		"format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+		"lint": "tslint -p tsconfig.json",
+		"start": "tsc && node dist/index.js",
+		"test": "mocha -r ts-node/register src/**/*.spec.ts",
+		"build": "tsc"
+	},
+	"keywords": [
+		"rxjs"
+	],
+	"author": "Rober Rahn & Ammar Najjar",
+	"license": "MIT",
+	"dependencies": {
+		"rxjs": "^6.3.3",
+		"typescript": "^3.2.2"
+	},
+	"devDependencies": {
+		"@types/chai": "^4.1.7",
+		"@types/mocha": "^5.2.5",
+		"chai": "^4.2.0",
+		"mocha": "^5.2.0",
+		"prettier": "^1.16.4",
+		"ts-node": "^8.0.2",
+		"tslint": "^5.12.1",
+		"tslint-config-prettier": "^1.18.0"
+	}
 }
