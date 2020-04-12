@@ -1,6 +1,6 @@
 import { cold, getTestScheduler } from 'jasmine-marbles';
-import { of, from, interval, timer, generate, range } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { of, from, interval, timer, generate, range, defer } from 'rxjs';
+import { take, concatMap, delay } from 'rxjs/operators';
 
 describe('Creators', () => {
   test.each([
@@ -29,6 +29,25 @@ describe('Creators', () => {
     const source = interval(input, getTestScheduler()).pipe(take(4));
     const expected = cold(marblesSeq, marblesObj);
     expect(source).toBeObservable(expected);
+  });
+
+  describe('defer', () => {
+    test('from array', () => {
+      const source = defer(() => from([0, 1, 2, 3]));
+      const expected = cold('(abcd|)', { a: 0, b: 1, c: 2, d: 3 });
+      expect(source).toBeObservable(expected);
+    });
+    test('from array with time delay', () => {
+      const source = defer(() =>
+        from([0, 1, 2, 3]).pipe(
+          concatMap((x, i) =>
+            of(x).pipe(delay(i === 0 ? 0 : 20, getTestScheduler())),
+          ),
+        ),
+      );
+      const expected = cold('a-b-c-(d|)', { a: 0, b: 1, c: 2, d: 3 });
+      expect(source).toBeObservable(expected);
+    });
   });
 
   test('timer', () => {
