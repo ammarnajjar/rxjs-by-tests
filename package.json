@@ -6,8 +6,8 @@
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "start": "tsc && node dist/src/index.js",
-    "test": "jest --watch --coverage",
-    "test:ci": "jest --coverage",
+    "test": "jest --watch",
+    "test:ci": "jest",
     "build": "tsc"
   },
   "keywords": [
@@ -24,27 +24,6 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/*.{js,jsx,ts,tsx}",
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!src/index*",
-      "!<rootDir>/node_modules/",
-      "!<rootDir>/coverage/",
-      "!<rootDir>/dist/"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 95,
-        "functions": 95,
-        "lines": 95,
-        "statements": 95
-      }
-    },
-    "coverageReporters": [
-      "text"
-    ]
   },
   "devDependencies": {
     "@types/jest": "25.2.1",
