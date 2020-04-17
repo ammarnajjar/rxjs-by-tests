@@ -1,5 +1,5 @@
 import { cold, getTestScheduler } from 'jasmine-marbles';
-import { of, from, interval, timer, generate, range, defer } from 'rxjs';
+import { iif, of, from, interval, timer, generate, range, defer } from 'rxjs';
 import { take, concatMap, delay } from 'rxjs/operators';
 
 describe('Creators', () => {
@@ -75,6 +75,19 @@ describe('Creators', () => {
     test('with custom step', () => {
       const source = range(12, 4);
       const expected = cold('(abcd|)', { a: 12, b: 13, c: 14, d: 15 });
+      expect(source).toBeObservable(expected);
+    });
+  });
+
+  describe('iif', () => {
+    test.each([
+      [true, 'one', 'two', '(a|)', { a: 'one' }],
+      [false, 'one', 'two', '(a|)', { a: 'two' }],
+    ])('iif %p, %p, %p to %p %p', (cond, one, two, marblesSeq, marblesObj) => {
+      const first = of(one);
+      const second = of(two);
+      const source = iif(() => cond, first, second);
+      const expected = cold(marblesSeq, marblesObj);
       expect(source).toBeObservable(expected);
     });
   });
